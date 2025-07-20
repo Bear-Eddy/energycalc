@@ -148,7 +148,9 @@ const PersonalCalculator = {
     
     // Main calculation function
     calculatePersonalFootprint() {
+        console.log('calculatePersonalFootprint called');
         const inputs = this.getInputValues();
+        console.log('Got inputs:', inputs);
         
         // Calculate energy by category
         const digitalResult = this.calculateDigitalEnergy(inputs);
@@ -183,5 +185,11 @@ const PersonalCalculator = {
         
         // Scroll to results
         resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        
+        // Update info cards with the calculated values
+        if (window.InfoCardUpdater) {
+            console.log('Updating info cards after calculation');
+            window.InfoCardUpdater.updateCards();
+        }
     }
 };

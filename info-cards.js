@@ -78,10 +78,13 @@ const InfoCardUpdater = {
     
     // Update AI card
     updateAICard(textHours, images, videoMins) {
+        console.log('updateAICard called with:', { textHours, images, videoMins });
         const factors = EnergyConfig.energyFactors;
         const aiEnergy = (textHours * factors.aiText) + 
                         (images * factors.aiImage) + 
                         (videoMins * factors.aiVideo);
+        
+        console.log('AI energy calculated:', aiEnergy);
         
         const valueEl = document.getElementById('ai-value');
         const descEl = document.getElementById('ai-desc');
@@ -166,21 +169,6 @@ const InfoCardUpdater = {
     init() {
         console.log('Initializing InfoCardUpdater...');
         const self = this;
-        
-        // Add listener to calculate button
-        const calculateBtn = document.getElementById('calculate-btn');
-        if (calculateBtn) {
-            console.log('Calculate button found, adding listener');
-            calculateBtn.addEventListener('click', () => {
-                console.log('Calculate button clicked!');
-                // Small delay to ensure DOM is updated
-                setTimeout(() => {
-                    self.updateCards();
-                }, 100);
-            });
-        } else {
-            console.error('Calculate button not found!');
-        }
         
         // Add real-time updates
         const inputs = document.querySelectorAll('#smartphone-hours, #computer-hours, #streaming-hours, #ai-text-hours, #ai-images, #ai-video-mins, #car-type, #miles-driven');
