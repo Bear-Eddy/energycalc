@@ -3,6 +3,7 @@
 const InfoCardUpdater = {
     // Update all info cards based on current input values
     updateCards() {
+        console.log('Updating info cards...');
         const inputs = PersonalCalculator.getInputValues();
         
         // Update digital cards
@@ -145,21 +146,35 @@ const InfoCardUpdater = {
     
     // Initialize the updater
     init() {
-        // Update cards when calculator runs
-        const originalCalculate = PersonalCalculator.calculatePersonalFootprint;
+        // Store reference to original function
+        const self = this;
+        const originalCalculate = PersonalCalculator.calculatePersonalFootprint.bind(PersonalCalculator);
+        
+        // Override the calculate function to also update cards
         PersonalCalculator.calculatePersonalFootprint = function() {
-            originalCalculate.call(PersonalCalculator);
-            InfoCardUpdater.updateCards();
+            originalCalculate();
+            self.updateCards();
         };
+        
+        // Add listener to calculate button
+        const calculateBtn = document.getElementById('calculate-btn');
+        if (calculateBtn) {
+            calculateBtn.addEventListener('click', () => {
+                // Small delay to ensure calculations are done
+                setTimeout(() => {
+                    self.updateCards();
+                }, 50);
+            });
+        }
         
         // Add real-time updates
         const inputs = document.querySelectorAll('#smartphone-hours, #computer-hours, #streaming-hours, #ai-text-hours, #ai-images, #ai-video-mins, #car-type, #miles-driven');
         inputs.forEach(input => {
             input.addEventListener('input', () => {
-                InfoCardUpdater.updateCards();
+                self.updateCards();
             });
             input.addEventListener('change', () => {
-                InfoCardUpdater.updateCards();
+                self.updateCards();
             });
         });
         
