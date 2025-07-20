@@ -13,7 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
         PersonalCalculator.init();
         console.log('Personal calculator initialized');
         
-        // Add any additional initialization here
+        // Initialize info card updater
+        InfoCardUpdater.init();
+        console.log('Info card updater initialized');
         
         console.log('Energy Calculator ready!');
     } catch (error) {
