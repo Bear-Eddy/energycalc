@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yourdomain.com/sitemap.xml
+# Update this URL when using a custom domain
+Sitemap: https://teamupswell.github.io/EnergyCalc/sitemap.xml
