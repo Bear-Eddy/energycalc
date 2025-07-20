@@ -89,7 +89,12 @@ const InfoCardUpdater = {
         const valueEl = document.getElementById('ai-value');
         const descEl = document.getElementById('ai-desc');
         
+        console.log('AI value element found:', !!valueEl);
+        console.log('AI desc element found:', !!descEl);
+        
         if (valueEl) {
+            console.log('Current AI value HTML:', valueEl.innerHTML);
+            console.log('Setting new AI value...');
             if (aiEnergy === 0) {
                 valueEl.innerHTML = `0<span class="unit"> kWh/day</span>`;
             } else if (aiEnergy < 0.1) {
@@ -97,6 +102,7 @@ const InfoCardUpdater = {
             } else {
                 valueEl.innerHTML = `${aiEnergy.toFixed(1)}<span class="unit"> kWh/day</span>`;
             }
+            console.log('New AI value HTML:', valueEl.innerHTML);
         }
         
         if (descEl) {

@@ -310,7 +310,7 @@
             
             <div class="calc-results">
                 <button id="calculate-btn">Calculate My Footprint</button>
-                <button onclick="if(window.InfoCardUpdater) { window.InfoCardUpdater.updateCards(); alert('Updated!'); } else { alert('InfoCardUpdater not found!'); }" style="background: #ff6b6b; margin-left: 10px;">Test Update Cards</button>
+                <button onclick="testDirectUpdate()" style="background: #ff6b6b; margin-left: 10px;">Test Update Cards</button>
                 <div id="personal-results" class="personal-results hidden">
                     <h3>Your Personal Daily Energy Footprint</h3>
                     <div class="result-grid">
@@ -773,5 +773,38 @@
     <script src="calculator.js"></script>
     <script src="info-cards.js"></script>
     <script src="main.js"></script>
+    
+    <script>
+    function testDirectUpdate() {
+        console.log('=== TEST DIRECT UPDATE ===');
+        
+        // Test 1: Can we find the element?
+        const aiValue = document.getElementById('ai-value');
+        console.log('AI value element:', aiValue);
+        console.log('AI value element found:', !!aiValue);
+        
+        if (aiValue) {
+            // Test 2: What's the current content?
+            console.log('Current innerHTML:', aiValue.innerHTML);
+            
+            // Test 3: Direct update
+            aiValue.innerHTML = '99.9<span class="unit"> kWh/day</span>';
+            console.log('Set to 99.9 - new innerHTML:', aiValue.innerHTML);
+            
+            // Test 4: Check if it stuck
+            setTimeout(() => {
+                console.log('After 100ms, innerHTML is:', aiValue.innerHTML);
+            }, 100);
+        }
+        
+        // Test 5: Try InfoCardUpdater
+        if (window.InfoCardUpdater) {
+            console.log('InfoCardUpdater found, calling updateCards()');
+            window.InfoCardUpdater.updateCards();
+        } else {
+            console.log('ERROR: InfoCardUpdater not found!');
+        }
+    }
+    </script>
 </body>
 </html>
