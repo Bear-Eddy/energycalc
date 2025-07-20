@@ -4,7 +4,20 @@ const InfoCardUpdater = {
     // Update all info cards based on current input values
     updateCards() {
         console.log('Updating info cards...');
-        const inputs = PersonalCalculator.getInputValues();
+        
+        // Get values directly from DOM instead of relying on PersonalCalculator
+        const inputs = {
+            smartphoneHours: parseFloat(document.getElementById('smartphone-hours').value) || 0,
+            computerHours: parseFloat(document.getElementById('computer-hours').value) || 0,
+            streamingHours: parseFloat(document.getElementById('streaming-hours').value) || 0,
+            aiTextHours: parseFloat(document.getElementById('ai-text-hours').value) || 0,
+            aiImages: parseFloat(document.getElementById('ai-images').value) || 0,
+            aiVideoMins: parseFloat(document.getElementById('ai-video-mins').value) || 0,
+            carType: document.getElementById('car-type').value,
+            milesDriven: parseFloat(document.getElementById('miles-driven').value) || 0
+        };
+        
+        console.log('Input values:', inputs);
         
         // Update digital cards
         this.updateSmartphoneCard(inputs.smartphoneHours);
@@ -18,9 +31,14 @@ const InfoCardUpdater = {
     
     // Update smartphone card
     updateSmartphoneCard(hours) {
+        console.log('Updating smartphone card with hours:', hours);
         const energy = (hours * EnergyConfig.energyFactors.smartphone).toFixed(1);
         const valueEl = document.getElementById('smartphone-value');
         const descEl = document.getElementById('smartphone-desc');
+        
+        console.log('Smartphone energy calculated:', energy);
+        console.log('Value element found:', !!valueEl);
+        console.log('Desc element found:', !!descEl);
         
         if (valueEl) {
             valueEl.innerHTML = `${energy}<span class="unit"> kWh/day</span>`;
@@ -146,29 +164,28 @@ const InfoCardUpdater = {
     
     // Initialize the updater
     init() {
-        // Store reference to original function
+        console.log('Initializing InfoCardUpdater...');
         const self = this;
-        const originalCalculate = PersonalCalculator.calculatePersonalFootprint.bind(PersonalCalculator);
-        
-        // Override the calculate function to also update cards
-        PersonalCalculator.calculatePersonalFootprint = function() {
-            originalCalculate();
-            self.updateCards();
-        };
         
         // Add listener to calculate button
         const calculateBtn = document.getElementById('calculate-btn');
         if (calculateBtn) {
+            console.log('Calculate button found, adding listener');
             calculateBtn.addEventListener('click', () => {
-                // Small delay to ensure calculations are done
+                console.log('Calculate button clicked!');
+                // Small delay to ensure DOM is updated
                 setTimeout(() => {
                     self.updateCards();
-                }, 50);
+                }, 100);
             });
+        } else {
+            console.error('Calculate button not found!');
         }
         
         // Add real-time updates
         const inputs = document.querySelectorAll('#smartphone-hours, #computer-hours, #streaming-hours, #ai-text-hours, #ai-images, #ai-video-mins, #car-type, #miles-driven');
+        console.log('Found', inputs.length, 'input elements');
+        
         inputs.forEach(input => {
             input.addEventListener('input', () => {
                 self.updateCards();
@@ -178,7 +195,10 @@ const InfoCardUpdater = {
             });
         });
         
-        // Initial update
-        this.updateCards();
+        // Initial update after a short delay
+        setTimeout(() => {
+            console.log('Running initial update...');
+            this.updateCards();
+        }, 200);
     }
 };

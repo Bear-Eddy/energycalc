@@ -9,15 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
         ChartManager.initializeCharts();
         console.log('Charts initialized successfully');
         
-        // Initialize personal calculator FIRST
+        // Initialize personal calculator
         PersonalCalculator.init();
         console.log('Personal calculator initialized');
         
-        // Initialize info card updater AFTER calculator is ready
-        setTimeout(() => {
-            InfoCardUpdater.init();
-            console.log('Info card updater initialized');
-        }, 100);
+        // Initialize info card updater
+        InfoCardUpdater.init();
+        console.log('Info card updater initialized');
         
         console.log('Energy Calculator ready!');
     } catch (error) {
