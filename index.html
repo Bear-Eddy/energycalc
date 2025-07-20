@@ -128,7 +128,7 @@
                         </div>
                         <div class="ai-input-row">
                             <label>Text chat (GPT-3.5/4)</label>
-                            <input type="number" id="ai-text-hours" min="0" max="24" step="0.1" value="1" onchange="console.log('AI text hours changed to:', this.value)" />
+                            <input type="number" id="ai-text-hours" min="0" max="24" step="0.1" value="1" />
                             <span class="unit-label">hrs/day</span>
                         </div>
                         <div class="ai-input-row">
@@ -309,9 +309,7 @@
             </div>
             
             <div class="calc-results">
-                <button id="calculate-btn" onclick="console.log('Calculate button clicked!')">Calculate My Footprint</button>
-                <button onclick="testDirectUpdate()" style="background: #ff6b6b; margin-left: 10px;">Test Update Cards</button>
-                <button onclick="testAICardUpdate()" style="background: #ffa500; margin-left: 10px;">Test AI Card</button>
+                <button id="calculate-btn">Calculate My Footprint</button>
                 <div id="personal-results" class="personal-results hidden">
                     <h3>Your Personal Daily Energy Footprint</h3>
                     <div class="result-grid">
