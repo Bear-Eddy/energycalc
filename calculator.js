@@ -183,8 +183,10 @@ const PersonalCalculator = {
             lifestyle: lifestyleTotal
         });
         
-        // Scroll to results
-        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Scroll to results - with a small delay to prevent layout issues
+        setTimeout(() => {
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
         
         // Update info cards with the calculated values
         if (window.InfoCardUpdater) {
