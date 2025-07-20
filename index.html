@@ -528,6 +528,7 @@
         <div class="ai-section collapsible">
             <div class="ai-section-header" onclick="toggleAISection()">
                 <h2 class="ai-title">🤖 AI Energy Consumption: It's Complicated</h2>
+                <button class="comparison-btn" onclick="event.stopPropagation(); showCryptoComparison()">⚡ Compare to Crypto</button>
                 <span class="toggle-icon">▼</span>
             </div>
             <div class="ai-section-content">
@@ -766,6 +767,61 @@
         ↑
     </button>
     
+    <!-- Crypto vs AI Comparison Modal -->
+    <div id="cryptoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>⚡ Crypto vs AI: The Energy Showdown</h2>
+                <span class="close-btn" onclick="closeCryptoComparison()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="comparison-stats">
+                    <div class="stat-box crypto">
+                        <h3>🪙 Cryptocurrency Mining</h3>
+                        <div class="big-stat">150<span class="stat-unit"> TWh/year</span></div>
+                        <p>Equivalent to Argentina's total electricity consumption</p>
+                    </div>
+                    <div class="stat-box ai">
+                        <h3>🤖 AI & Machine Learning</h3>
+                        <div class="big-stat">8<span class="stat-unit"> TWh/year</span></div>
+                        <p>Just AI workloads - growing at 30% annually</p>
+                    </div>
+                    <div class="stat-box verdict">
+                        <h3>📊 The Verdict</h3>
+                        <div class="big-stat">19x</div>
+                        <p>Crypto currently uses 19x more energy than AI</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-details">
+                    <h4>Key Insights:</h4>
+                    <ul>
+                        <li><strong>Current Leader:</strong> Crypto mining uses as much electricity as entire countries</li>
+                        <li><strong>Growth Rate:</strong> AI energy use growing 30% annually vs crypto's stable consumption</li>
+                        <li><strong>Efficiency Gap:</strong> One Bitcoin transaction uses ~1,200,000 kWh vs 0.003 kWh for a ChatGPT query</li>
+                        <li><strong>Future Projection:</strong> By 2030, AI could reach 400 TWh while crypto grows to ~200 TWh</li>
+                    </ul>
+                </div>
+                
+                <div class="environmental-impact">
+                    <h4>Environmental Context:</h4>
+                    <div class="impact-grid">
+                        <div class="impact-item">
+                            <span class="impact-icon">🏠</span>
+                            <span class="impact-value">16M</span>
+                            <span class="impact-label">US homes could be powered by crypto mining energy</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-icon">🚗</span>
+                            <span class="impact-value">32M</span>
+                            <span class="impact-label">Electric cars could run on crypto's energy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- JavaScript Files -->
     <script src="config.js"></script>
     <script src="charts.js"></script>
@@ -780,6 +836,34 @@
     console.log('- ChartManager:', typeof ChartManager !== 'undefined');
     console.log('- PersonalCalculator:', typeof PersonalCalculator !== 'undefined');
     console.log('- InfoCardUpdater:', typeof InfoCardUpdater !== 'undefined');
+    
+    // Crypto vs AI Comparison Modal Functions
+    function showCryptoComparison() {
+        const modal = document.getElementById('cryptoModal');
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+    
+    function closeCryptoComparison() {
+        const modal = document.getElementById('cryptoModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+    
+    // Close modal when clicking outside of it
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('cryptoModal');
+        if (event.target === modal) {
+            closeCryptoComparison();
+        }
+    });
+    
+    // Close modal with Escape key
+    window.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeCryptoComparison();
+        }
+    });
     
     function testAICardUpdate() {
         console.log('=== TESTING AI CARD UPDATE ===');

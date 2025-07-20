@@ -631,10 +631,11 @@ canvas {
     padding: 30px 40px;
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     user-select: none;
     transition: background-color 0.3s ease;
+    position: relative;
 }
 
 .ai-section-header:hover {
@@ -649,6 +650,8 @@ canvas {
     font-size: 1.5em;
     color: #ffa500;
     transition: transform 0.3s ease;
+    position: absolute;
+    right: 40px;
 }
 
 .ai-section.collapsed .toggle-icon {
@@ -1088,6 +1091,226 @@ canvas {
     .ai-task-card:hover {
         transform: none;
     }
+}
+
+/* Comparison Button */
+.comparison-btn {
+    background: linear-gradient(135deg, #f7931a, #ffa500);
+    color: #0a0e27;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.comparison-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 165, 0, 0.4);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: linear-gradient(135deg, rgba(17, 25, 40, 0.98), rgba(10, 14, 39, 0.98));
+    margin: 5% auto;
+    padding: 0;
+    border: 2px solid rgba(100, 255, 218, 0.3);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.modal-header h2 {
+    margin: 0;
+    background: linear-gradient(45deg, #f7931a, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.8em;
+}
+
+.close-btn {
+    color: #8892b0;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #64ffda;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.comparison-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-box {
+    background: rgba(17, 25, 40, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid;
+}
+
+.stat-box.crypto {
+    border-color: #f7931a;
+    box-shadow: 0 0 20px rgba(247, 147, 26, 0.2);
+}
+
+.stat-box.ai {
+    border-color: #ffa500;
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
+}
+
+.stat-box.verdict {
+    border-color: #64ffda;
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+}
+
+.stat-box h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+}
+
+.stat-box.crypto h3 { color: #f7931a; }
+.stat-box.ai h3 { color: #ffa500; }
+.stat-box.verdict h3 { color: #64ffda; }
+
+.big-stat {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #fff;
+    margin: 10px 0;
+}
+
+.stat-unit {
+    font-size: 0.4em;
+    color: #8892b0;
+}
+
+.stat-box p {
+    margin: 10px 0 0 0;
+    font-size: 0.9em;
+    color: #a8b2d1;
+}
+
+.comparison-details {
+    background: rgba(100, 255, 218, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.comparison-details h4 {
+    color: #64ffda;
+    margin: 0 0 15px 0;
+}
+
+.comparison-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comparison-details li {
+    padding: 8px 0;
+    color: #ccd6f6;
+    padding-left: 20px;
+    position: relative;
+}
+
+.comparison-details li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: #64ffda;
+}
+
+.environmental-impact {
+    background: rgba(255, 165, 0, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.environmental-impact h4 {
+    color: #ffa500;
+    margin: 0 0 15px 0;
+}
+
+.impact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.impact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(17, 25, 40, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.impact-icon {
+    font-size: 2em;
+}
+
+.impact-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffa500;
+}
+
+.impact-label {
+    font-size: 0.9em;
+    color: #a8b2d1;
+    flex: 1;
 }
 
 /* Scroll to top button */
