@@ -309,7 +309,7 @@
             </div>
             
             <div class="calc-results">
-                <button id="calculate-btn">Calculate My Footprint</button>
+                <button id="calculate-btn" onclick="console.log('Calculate button clicked!')">Calculate My Footprint</button>
                 <button onclick="testDirectUpdate()" style="background: #ff6b6b; margin-left: 10px;">Test Update Cards</button>
                 <div id="personal-results" class="personal-results hidden">
                     <h3>Your Personal Daily Energy Footprint</h3>
@@ -775,6 +775,13 @@
     <script src="main.js"></script>
     
     <script>
+    // Check if files loaded
+    console.log('Page loaded. Checking components:');
+    console.log('- EnergyConfig:', typeof EnergyConfig !== 'undefined');
+    console.log('- ChartManager:', typeof ChartManager !== 'undefined');
+    console.log('- PersonalCalculator:', typeof PersonalCalculator !== 'undefined');
+    console.log('- InfoCardUpdater:', typeof InfoCardUpdater !== 'undefined');
+    
     function testDirectUpdate() {
         console.log('=== TEST DIRECT UPDATE ===');
         

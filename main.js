@@ -3,6 +3,7 @@
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     try {
+        console.log('DOMContentLoaded fired!');
         console.log('Initializing Energy Calculator...');
         
         // Initialize all charts
