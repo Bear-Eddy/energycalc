@@ -43,3 +43,24 @@ window.addEventListener('load', function() {
 
 // Make toggleAISection available globally
 window.toggleAISection = toggleAISection;
+
+// Scroll to top functionality
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Show/hide scroll to top button based on scroll position
+window.addEventListener('scroll', function() {
+    const scrollButton = document.getElementById('scrollToTop');
+    if (window.pageYOffset > 300) {
+        scrollButton.classList.add('visible');
+    } else {
+        scrollButton.classList.remove('visible');
+    }
+});
+
+// Make scrollToTop available globally
+window.scrollToTop = scrollToTop;

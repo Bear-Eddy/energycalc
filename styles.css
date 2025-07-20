@@ -813,41 +813,270 @@ canvas {
     width: 100%;
 }
 
-/* Mobile Responsive Styles */
+/* Enhanced Mobile Responsive Styles */
 @media (max-width: 768px) {
+    /* Layout adjustments */
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 0;
+    }
+    
+    /* Typography optimization */
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+    
+    .subtitle {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+    
+    /* Chart responsiveness */
     .chart-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
     }
     
-    h1 {
-        font-size: 2em;
+    .chart-container {
+        padding: 15px;
     }
     
+    .chart-title {
+        font-size: 1.1em;
+    }
+    
+    /* Info cards optimization */
     .info-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
     
-    .tooltip {
-        width: 250px;
-        font-size: 0.85em;
+    .info-card {
+        padding: 15px;
     }
     
+    /* Calculator section */
+    .calculator-section {
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .calculator-title {
+        font-size: 1.5em;
+    }
+    
+    .calculator-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .calc-category {
+        padding: 20px;
+    }
+    
+    /* Input optimization for touch */
     .input-group {
         grid-template-columns: 1fr;
-        gap: 5px;
+        gap: 8px;
+        margin-bottom: 20px;
     }
     
     .input-group input,
     .input-group select {
         width: 100%;
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 12px 16px;
+        margin-top: 5px;
     }
     
     .label-with-info {
         margin-bottom: 5px;
+        flex-wrap: wrap;
+    }
+    
+    .unit-label {
+        display: block;
+        margin-top: 5px;
+        text-align: right;
+    }
+    
+    /* AI section mobile optimization */
+    .ai-section-header {
+        padding: 20px;
+    }
+    
+    .ai-section-header .ai-title {
+        font-size: 1.3em;
+    }
+    
+    .ai-section-content {
+        padding: 0 20px 20px 20px;
+    }
+    
+    .ai-tasks-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
     
     .ai-input-row {
         grid-template-columns: 1fr;
-        gap: 5px;
+        gap: 8px;
+    }
+    
+    .ai-input-row input {
+        font-size: 16px;
+        padding: 12px 16px;
+        margin-top: 5px;
+    }
+    
+    /* Results section */
+    .result-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Button optimization */
+    #calculate-btn {
+        width: 100%;
+        padding: 18px 30px;
+        font-size: 1.1em;
+    }
+    
+    /* Tooltip adjustments */
+    .tooltip {
+        width: 90vw;
+        max-width: 300px;
+        font-size: 0.85em;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .info-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+    }
+    
+    /* Summary stats */
+    .summary-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    /* Explainer section */
+    .explainer-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Factor items */
+    .factors-list {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Improve readability */
+    .insight-box {
+        padding: 15px;
+    }
+    
+    .comparison-note {
+        padding: 15px;
+    }
+    
+    /* Footer */
+    .footer {
+        font-size: 0.8em;
+        padding: 0 10px;
+    }
+}
+
+/* Smaller mobile devices */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    .summary-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-value {
+        font-size: 2em;
+    }
+    
+    .info-card .value {
+        font-size: 1.5em;
+    }
+}
+
+/* Touch-friendly enhancements */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    .info-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    button, 
+    input, 
+    select {
+        min-height: 44px; /* Apple's recommended touch target size */
+    }
+    
+    /* Remove hover effects on touch devices */
+    .info-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .ai-task-card:hover {
+        transform: none;
+    }
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(100, 255, 218, 0.9);
+    color: #0a0e27;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(100, 255, 218, 0.3);
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top:hover {
+    background: #64ffda;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(100, 255, 218, 0.4);
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        width: 44px;
+        height: 44px;
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
     }
 }

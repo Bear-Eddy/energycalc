@@ -10,6 +10,10 @@ const ChartManager = {
         Chart.defaults.color = '#8892b0';
         Chart.defaults.borderColor = 'rgba(136, 146, 176, 0.1)';
         
+        // Mobile-friendly defaults
+        Chart.defaults.font.size = window.innerWidth < 768 ? 10 : 12;
+        Chart.defaults.plugins.legend.labels.font.size = window.innerWidth < 768 ? 10 : 12;
+        
         // Initialize each chart
         this.createMainBreakdownChart();
         this.createCategoryChart();
@@ -38,7 +42,7 @@ const ChartManager = {
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                aspectRatio: 2,
+                aspectRatio: window.innerWidth < 768 ? 1.5 : 2,
                 plugins: {
                     legend: {
                         display: false
@@ -267,7 +271,7 @@ const ChartManager = {
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                aspectRatio: 2,
+                aspectRatio: window.innerWidth < 768 ? 1.5 : 2,
                 indexAxis: 'y',
                 scales: {
                     x: {
@@ -384,7 +388,7 @@ const ChartManager = {
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
-                aspectRatio: 2,
+                aspectRatio: window.innerWidth < 768 ? 1.5 : 2,
                 plugins: {
                     legend: {
                         position: 'right',
