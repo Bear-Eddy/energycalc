@@ -128,7 +128,7 @@
                         </div>
                         <div class="ai-input-row">
                             <label>Text chat (GPT-3.5/4)</label>
-                            <input type="number" id="ai-text-hours" min="0" max="24" step="0.1" value="1" />
+                            <input type="number" id="ai-text-hours" min="0" max="24" step="0.1" value="1" onchange="console.log('AI text hours changed to:', this.value)" />
                             <span class="unit-label">hrs/day</span>
                         </div>
                         <div class="ai-input-row">
@@ -311,6 +311,7 @@
             <div class="calc-results">
                 <button id="calculate-btn" onclick="console.log('Calculate button clicked!')">Calculate My Footprint</button>
                 <button onclick="testDirectUpdate()" style="background: #ff6b6b; margin-left: 10px;">Test Update Cards</button>
+                <button onclick="testAICardUpdate()" style="background: #ffa500; margin-left: 10px;">Test AI Card</button>
                 <div id="personal-results" class="personal-results hidden">
                     <h3>Your Personal Daily Energy Footprint</h3>
                     <div class="result-grid">
@@ -781,6 +782,37 @@
     console.log('- ChartManager:', typeof ChartManager !== 'undefined');
     console.log('- PersonalCalculator:', typeof PersonalCalculator !== 'undefined');
     console.log('- InfoCardUpdater:', typeof InfoCardUpdater !== 'undefined');
+    
+    function testAICardUpdate() {
+        console.log('=== TESTING AI CARD UPDATE ===');
+        
+        // Get the current AI text hours value
+        const aiTextHours = parseFloat(document.getElementById('ai-text-hours').value) || 0;
+        console.log('Current AI text hours:', aiTextHours);
+        
+        // Calculate what the energy should be
+        const energyPerHour = 0.3; // from config
+        const expectedEnergy = aiTextHours * energyPerHour;
+        console.log('Expected energy:', expectedEnergy, 'kWh/day');
+        
+        // Get the AI card value element
+        const aiValueEl = document.getElementById('ai-value');
+        console.log('AI value element found:', !!aiValueEl);
+        
+        if (aiValueEl) {
+            console.log('Current AI card shows:', aiValueEl.textContent);
+            
+            // Try to update it directly
+            aiValueEl.innerHTML = `${expectedEnergy.toFixed(1)}<span class="unit"> kWh/day</span>`;
+            console.log('Updated AI card to:', aiValueEl.textContent);
+        }
+        
+        // Also test the InfoCardUpdater
+        if (window.InfoCardUpdater) {
+            console.log('Calling InfoCardUpdater.updateCards()...');
+            window.InfoCardUpdater.updateCards();
+        }
+    }
     
     function testDirectUpdate() {
         console.log('=== TEST DIRECT UPDATE ===');
