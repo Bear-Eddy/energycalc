@@ -200,5 +200,23 @@ const InfoCardUpdater = {
             console.log('Running initial update...');
             this.updateCards();
         }, 200);
+    },
+    
+    // Test function to directly update a card
+    testUpdate() {
+        console.log('Testing direct update...');
+        const valueEl = document.getElementById('ai-value');
+        const descEl = document.getElementById('ai-desc');
+        console.log('AI value element:', valueEl);
+        console.log('AI desc element:', descEl);
+        
+        if (valueEl) {
+            valueEl.innerHTML = '99.9<span class="unit"> kWh/day</span>';
+            console.log('Updated AI value to 99.9');
+        }
+        if (descEl) {
+            descEl.textContent = 'TEST UPDATE WORKED';
+            console.log('Updated AI description');
+        }
     }
 };

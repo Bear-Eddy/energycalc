@@ -66,3 +66,6 @@ window.addEventListener('scroll', function() {
 
 // Make scrollToTop available globally
 window.scrollToTop = scrollToTop;
+
+// Make InfoCardUpdater available globally for testing
+window.InfoCardUpdater = InfoCardUpdater;
