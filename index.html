@@ -786,31 +786,42 @@
     function testAICardUpdate() {
         console.log('=== TESTING AI CARD UPDATE ===');
         
-        // Get the current AI text hours value
+        // Get all AI input values
         const aiTextHours = parseFloat(document.getElementById('ai-text-hours').value) || 0;
-        console.log('Current AI text hours:', aiTextHours);
+        const aiImages = parseFloat(document.getElementById('ai-images').value) || 0;
+        const aiVideoMins = parseFloat(document.getElementById('ai-video-mins').value) || 0;
         
-        // Calculate what the energy should be
-        const energyPerHour = 0.3; // from config
-        const expectedEnergy = aiTextHours * energyPerHour;
-        console.log('Expected energy:', expectedEnergy, 'kWh/day');
+        console.log('AI inputs:', {
+            textHours: aiTextHours,
+            images: aiImages,
+            videoMins: aiVideoMins
+        });
+        
+        // Calculate total AI energy
+        const textEnergy = aiTextHours * 0.3;
+        const imageEnergy = aiImages * 0.1;
+        const videoEnergy = aiVideoMins * 1.0;
+        const totalEnergy = textEnergy + imageEnergy + videoEnergy;
+        
+        console.log('Energy breakdown:');
+        console.log('- Text:', textEnergy, 'kWh (', aiTextHours, 'hrs × 0.3)');
+        console.log('- Images:', imageEnergy, 'kWh (', aiImages, 'images × 0.1)');
+        console.log('- Video:', videoEnergy, 'kWh (', aiVideoMins, 'mins × 1.0)');
+        console.log('- TOTAL:', totalEnergy, 'kWh/day');
         
         // Get the AI card value element
         const aiValueEl = document.getElementById('ai-value');
-        console.log('AI value element found:', !!aiValueEl);
+        console.log('Current AI card shows:', aiValueEl ? aiValueEl.textContent : 'NOT FOUND');
         
-        if (aiValueEl) {
-            console.log('Current AI card shows:', aiValueEl.textContent);
-            
-            // Try to update it directly
-            aiValueEl.innerHTML = `${expectedEnergy.toFixed(1)}<span class="unit"> kWh/day</span>`;
-            console.log('Updated AI card to:', aiValueEl.textContent);
-        }
-        
-        // Also test the InfoCardUpdater
+        // Test the InfoCardUpdater
         if (window.InfoCardUpdater) {
             console.log('Calling InfoCardUpdater.updateCards()...');
             window.InfoCardUpdater.updateCards();
+            
+            // Check what it shows after update
+            setTimeout(() => {
+                console.log('After update, AI card shows:', aiValueEl ? aiValueEl.textContent : 'NOT FOUND');
+            }, 100);
         }
     }
     

@@ -6,13 +6,24 @@ const ChartManager = {
     
     // Initialize all static charts
     initializeCharts() {
+        // Check if Chart.js is loaded
+        if (typeof Chart === 'undefined') {
+            console.error('Chart.js is not loaded!');
+            return;
+        }
+        
         // Set Chart.js defaults
         Chart.defaults.color = '#8892b0';
         Chart.defaults.borderColor = 'rgba(136, 146, 176, 0.1)';
         
         // Mobile-friendly defaults
-        Chart.defaults.font.size = window.innerWidth < 768 ? 10 : 12;
-        Chart.defaults.plugins.legend.labels.font.size = window.innerWidth < 768 ? 10 : 12;
+        if (Chart.defaults.font) {
+            Chart.defaults.font.size = window.innerWidth < 768 ? 10 : 12;
+        }
+        if (Chart.defaults.plugins && Chart.defaults.plugins.legend && Chart.defaults.plugins.legend.labels) {
+            Chart.defaults.plugins.legend.labels.font = Chart.defaults.plugins.legend.labels.font || {};
+            Chart.defaults.plugins.legend.labels.font.size = window.innerWidth < 768 ? 10 : 12;
+        }
         
         // Initialize each chart
         this.createMainBreakdownChart();
