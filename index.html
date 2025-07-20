@@ -310,6 +310,7 @@
             
             <div class="calc-results">
                 <button id="calculate-btn">Calculate My Footprint</button>
+                <button onclick="if(window.InfoCardUpdater) { window.InfoCardUpdater.updateCards(); alert('Updated!'); } else { alert('InfoCardUpdater not found!'); }" style="background: #ff6b6b; margin-left: 10px;">Test Update Cards</button>
                 <div id="personal-results" class="personal-results hidden">
                     <h3>Your Personal Daily Energy Footprint</h3>
                     <div class="result-grid">

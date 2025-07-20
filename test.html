@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Info Card Update</title>
+    <style>
+        body { background: #0a0e27; color: white; padding: 20px; }
+        .info-card { background: rgba(100, 255, 218, 0.1); padding: 20px; margin: 10px; border-radius: 10px; }
+        button { padding: 10px 20px; margin: 10px; }
+        input { padding: 5px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Test Info Card Updates</h1>
+    
+    <div class="info-card" id="ai-card">
+        <h3>AI Assistant</h3>
+        <div class="value" id="ai-value">0.5-2<span class="unit"> kWh/day</span></div>
+        <div class="description" id="ai-desc">Varies by task type</div>
+    </div>
+    
+    <div>
+        <label>AI Text Hours: <input type="number" id="ai-text-hours" value="1" /></label><br>
+        <label>AI Images: <input type="number" id="ai-images" value="2" /></label><br>
+        <label>AI Video Mins: <input type="number" id="ai-video-mins" value="0" /></label><br>
+        <button onclick="testUpdate()">Test Update</button>
+        <button onclick="directUpdate()">Direct Update</button>
+    </div>
+    
+    <div id="log" style="margin-top: 20px; font-family: monospace;"></div>
+    
+    <script src="config.js"></script>
+    <script>
+        function log(msg) {
+            const logDiv = document.getElementById('log');
+            logDiv.innerHTML += msg + '<br>';
+            console.log(msg);
+        }
+        
+        function testUpdate() {
+            log('Testing update...');
+            
+            const textHours = parseFloat(document.getElementById('ai-text-hours').value) || 0;
+            const images = parseFloat(document.getElementById('ai-images').value) || 0;
+            const videoMins = parseFloat(document.getElementById('ai-video-mins').value) || 0;
+            
+            log(`Inputs: text=${textHours}, images=${images}, video=${videoMins}`);
+            
+            const factors = EnergyConfig.energyFactors;
+            const aiEnergy = (textHours * factors.aiText) + 
+                            (images * factors.aiImage) + 
+                            (videoMins * factors.aiVideo);
+            
+            log(`Calculated energy: ${aiEnergy} kWh/day`);
+            
+            const valueEl = document.getElementById('ai-value');
+            const descEl = document.getElementById('ai-desc');
+            
+            log(`Value element found: ${!!valueEl}`);
+            log(`Desc element found: ${!!descEl}`);
+            
+            if (valueEl) {
+                valueEl.innerHTML = `${aiEnergy.toFixed(1)}<span class="unit"> kWh/day</span>`;
+                log('Updated value element');
+            }
+            
+            if (descEl) {
+                let desc = [];
+                if (textHours > 0) desc.push(`${textHours}hr chat`);
+                if (images > 0) desc.push(`${images} images`);
+                if (videoMins > 0) desc.push(`${videoMins}min video`);
+                descEl.textContent = desc.join(', ') || 'No AI usage';
+                log('Updated description element');
+            }
+        }
+        
+        function directUpdate() {
+            log('Direct update test...');
+            const valueEl = document.getElementById('ai-value');
+            if (valueEl) {
+                valueEl.innerHTML = '99.9<span class="unit"> kWh/day</span>';
+                log('Direct update successful');
+            } else {
+                log('ERROR: Could not find ai-value element');
+            }
+        }
+    </script>
+</body>
+</html>

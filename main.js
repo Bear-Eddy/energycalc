@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
         InfoCardUpdater.init();
         console.log('Info card updater initialized');
         
+        // Make InfoCardUpdater available globally AFTER init
+        window.InfoCardUpdater = InfoCardUpdater;
+        console.log('InfoCardUpdater available globally:', !!window.InfoCardUpdater);
+        
         console.log('Energy Calculator ready!');
     } catch (error) {
         console.error('Error initializing Energy Calculator:', error);
@@ -66,6 +70,3 @@ window.addEventListener('scroll', function() {
 
 // Make scrollToTop available globally
 window.scrollToTop = scrollToTop;
-
-// Make InfoCardUpdater available globally for testing
-window.InfoCardUpdater = InfoCardUpdater;
