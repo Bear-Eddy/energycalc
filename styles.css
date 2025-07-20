@@ -441,22 +441,24 @@ canvas {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
-    background: rgba(100, 255, 218, 0.2);
-    border: 1px solid rgba(100, 255, 218, 0.5);
+    width: 16px;
+    height: 16px;
+    background: rgba(100, 255, 218, 0.15);
+    border: 1px solid rgba(100, 255, 218, 0.3);
     border-radius: 50%;
     color: #64ffda;
-    font-size: 12px;
+    font-size: 11px;
     cursor: help;
     position: relative;
-    margin-left: 5px;
+    margin-left: 3px;
     transition: all 0.3s ease;
+    opacity: 0.7;
 }
 
 .info-icon:hover {
     background: rgba(100, 255, 218, 0.3);
     transform: scale(1.1);
+    opacity: 1;
 }
 
 .tooltip {
@@ -535,7 +537,7 @@ canvas {
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 8px;
+    gap: 5px;
 }
 
 /* Energy Explainer Styles */
@@ -798,6 +800,11 @@ canvas {
 /* AI input styles */
 .ai-input-group {
     margin-bottom: 15px;
+}
+
+.ai-group-label {
+    margin-bottom: 10px;
+    display: block;
 }
 
 .ai-input-row {
