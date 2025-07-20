@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate and understand your complete personal energy footprint across all daily activities">
+    <title>Complete Personal Energy Footprint Analysis</title>
+    
+    <!-- External Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Complete Personal Energy Footprint</h1>
+        <p class="subtitle">Your Full Daily Energy Consumption Across All Activities</p>
+        
+        <!-- Visible vs Hidden Energy Explainer -->
+        <div class="energy-explainer">
+            <h3>👁️ The Energy You See vs The Energy You Don't</h3>
+            <div class="explainer-grid">
+                <div class="explainer-item visible">
+                    <h4>🏠 Visible Energy (~40%)</h4>
+                    <p>Shows up on your utility bills:</p>
+                    <ul>
+                        <li>Home electricity & gas</li>
+                        <li>EV charging</li>
+                        <li>Device charging</li>
+                    </ul>
+                </div>
+                <div class="explainer-item hidden">
+                    <h4>☁️ Hidden Energy (~60%)</h4>
+                    <p>Infrastructure & supply chains:</p>
+                    <ul>
+                        <li>Data centers & networks</li>
+                        <li>Manufacturing & shipping</li>
+                        <li>Food production & transport</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="explainer-note">💡 Hover over the ⓘ icons throughout this page to see the breakdown for each category!</p>
+        </div>
+        
+        <!-- Personal Calculator Section -->
+        <div class="calculator-section">
+            <h2 class="calculator-title">🧮 Calculate Your Personal Energy Footprint</h2>
+            <p class="calculator-subtitle">Enter your daily usage to see your personalized energy consumption</p>
+            
+            <div class="calculator-grid">
+                <!-- Digital Usage -->
+                <div class="calc-category">
+                    <h3>💻 Digital Life</h3>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Smartphone use (hours/day)</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Smartphone Energy</h4>
+                                    <p><span class="visible-energy">Visible (10%):</span> Phone charging shows on your electric bill (~0.01 kWh/day)</p>
+                                    <p><span class="hidden-energy">Hidden (90%):</span> Cell towers, data centers, network infrastructure use ~0.08 kWh/hour</p>
+                                    <div class="energy-breakdown">
+                                        <span>📱 Device: 10%</span>
+                                        <span>☁️ Infrastructure: 90%</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <input type="number" id="smartphone-hours" min="0" max="24" step="0.5" value="5" />
+                        <span class="unit-label">hrs</span>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Computer/laptop use (hours/day)</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Computer Energy</h4>
+                                    <p><span class="visible-energy">Visible (15%):</span> Your device power consumption (~0.15 kWh/hour)</p>
+                                    <p><span class="hidden-energy">Hidden (85%):</span> Cloud services, data centers, cooling systems (~0.85 kWh/hour)</p>
+                                    <div class="energy-breakdown">
+                                        <span>💻 Device: 15%</span>
+                                        <span>🖥️ Servers: 85%</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <input type="number" id="computer-hours" min="0" max="24" step="0.5" value="8" />
+                        <span class="unit-label">hrs</span>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Streaming/gaming (hours/day)</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Streaming Energy</h4>
+                                    <p><span class="visible-energy">Visible (20%):</span> TV/device power (~0.05 kWh/hour)</p>
+                                    <p><span class="hidden-energy">Hidden (80%):</span> CDN servers, internet backbone, content delivery (~0.2 kWh/hour)</p>
+                                    <div class="energy-breakdown">
+                                        <span>📺 Screen: 20%</span>
+                                        <span>🌐 Network: 80%</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <input type="number" id="streaming-hours" min="0" max="24" step="0.5" value="3" />
+                        <span class="unit-label">hrs</span>
+                    </div>
+                    
+                    <!-- Enhanced AI Usage Inputs -->
+                    <div class="ai-input-group">
+                        <div class="label-with-info">
+                            <label style="margin-bottom: 10px; display: block;">AI assistant use (by task type)</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>AI Energy Varies by Task</h4>
+                                    <p><span class="visible-energy">Visible (1%):</span> Negligible device energy</p>
+                                    <p><span class="hidden-energy">Hidden (99%):</span> GPU clusters and servers vary greatly by task type</p>
+                                    <div class="energy-breakdown">
+                                        <span>💬 Text: 0.3 kWh/hr</span>
+                                        <span>🎨 Images: 0.1 kWh each</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <div class="ai-input-row">
+                            <label>Text chat (GPT-3.5/4)</label>
+                            <input type="number" id="ai-text-hours" min="0" max="24" step="0.1" value="1" />
+                            <span class="unit-label">hrs/day</span>
+                        </div>
+                        <div class="ai-input-row">
+                            <label>Image generation</label>
+                            <input type="number" id="ai-images" min="0" max="100" step="1" value="2" />
+                            <span class="unit-label">images</span>
+                        </div>
+                        <div class="ai-input-row">
+                            <label>Video generation</label>
+                            <input type="number" id="ai-video-mins" min="0" max="60" step="1" value="0" />
+                            <span class="unit-label">minutes</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Transportation -->
+                <div class="calc-category">
+                    <h3>🚗 Transportation</h3>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Car type</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Vehicle Energy</h4>
+                                    <p><span class="visible-energy">Gas:</span> See it at the pump, not electric bill</p>
+                                    <p><span class="visible-energy">Electric:</span> Shows on your electric bill</p>
+                                    <p><span class="hidden-energy">Hidden:</span> Oil refining, battery manufacturing, road infrastructure</p>
+                                </div>
+                            </span>
+                        </div>
+                        <select id="car-type">
+                            <option value="gas">Gas/Petrol</option>
+                            <option value="electric">Electric</option>
+                            <option value="hybrid">Hybrid</option>
+                            <option value="none">No car</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Miles driven per day</label>
+                        </div>
+                        <input type="number" id="miles-driven" min="0" max="500" step="5" value="30" />
+                        <span class="unit-label">mi</span>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Flights per year</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Aviation Energy</h4>
+                                    <p><span class="visible-energy">Visible (0%):</span> None on your bills</p>
+                                    <p><span class="hidden-energy">Hidden (100%):</span> Jet fuel, airport operations, aircraft manufacturing share</p>
+                                    <div class="energy-breakdown">
+                                        <span>✈️ All hidden energy</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <input type="number" id="flights-year" min="0" max="100" step="1" value="4" />
+                        <span class="unit-label">flights</span>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Public transit (hours/week)</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Transit Energy</h4>
+                                    <p><span class="visible-energy">Visible (0%):</span> Paid through fares, not bills</p>
+                                    <p><span class="hidden-energy">Hidden (100%):</span> Train/bus operations, infrastructure maintenance</p>
+                                </div>
+                            </span>
+                        </div>
+                        <input type="number" id="transit-hours" min="0" max="100" step="1" value="5" />
+                        <span class="unit-label">hrs</span>
+                    </div>
+                </div>
+                
+                <!-- Home -->
+                <div class="calc-category">
+                    <h3>🏠 Home</h3>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Home size</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Home Energy</h4>
+                                    <p><span class="visible-energy">Visible (100%):</span> All home energy appears on utility bills</p>
+                                    <p><span class="hidden-energy">Hidden:</span> Construction energy, material manufacturing (not counted here)</p>
+                                    <div class="energy-breakdown">
+                                        <span>🏠 All visible on bills</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <select id="home-size">
+                            <option value="small">Small (< 1000 sq ft)</option>
+                            <option value="medium" selected>Medium (1000-2000 sq ft)</option>
+                            <option value="large">Large (2000-3000 sq ft)</option>
+                            <option value="xlarge">XL (> 3000 sq ft)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Climate zone</label>
+                        </div>
+                        <select id="climate">
+                            <option value="mild">Mild (minimal heating/cooling)</option>
+                            <option value="moderate" selected>Moderate</option>
+                            <option value="extreme">Extreme (hot or cold)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>People in household</label>
+                        </div>
+                        <input type="number" id="household-size" min="1" max="10" step="1" value="2" />
+                        <span class="unit-label">people</span>
+                    </div>
+                </div>
+                
+                <!-- Lifestyle -->
+                <div class="calc-category">
+                    <h3>🍽️ Lifestyle</h3>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Diet type</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Food Energy</h4>
+                                    <p><span class="visible-energy">Visible (20%):</span> Home cooking, refrigeration on electric bill</p>
+                                    <p><span class="hidden-energy">Hidden (80%):</span> Farming, processing, transport, packaging, retail</p>
+                                    <div class="energy-breakdown">
+                                        <span>🏠 Home: 20%</span>
+                                        <span>🚜 Supply Chain: 80%</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <select id="diet-type">
+                            <option value="meat-heavy">Meat heavy</option>
+                            <option value="average" selected>Average</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Meals eaten out per week</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Restaurant Energy</h4>
+                                    <p><span class="visible-energy">Visible (0%):</span> None on your bills</p>
+                                    <p><span class="hidden-energy">Hidden (100%):</span> Restaurant operations, commercial cooking, dishwashing</p>
+                                </div>
+                            </span>
+                        </div>
+                        <input type="number" id="meals-out" min="0" max="21" step="1" value="3" />
+                        <span class="unit-label">meals</span>
+                    </div>
+                    <div class="input-group">
+                        <div class="label-with-info">
+                            <label>Online shopping orders/month</label>
+                            <span class="info-icon" tabindex="0">ⓘ
+                                <div class="tooltip">
+                                    <h4>Shopping Energy</h4>
+                                    <p><span class="visible-energy">Visible (0%):</span> None on your bills</p>
+                                    <p><span class="hidden-energy">Hidden (100%):</span> Warehouses, delivery vehicles, packaging production</p>
+                                    <div class="energy-breakdown">
+                                        <span>📦 All supply chain energy</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                        <input type="number" id="shopping-orders" min="0" max="100" step="1" value="5" />
+                        <span class="unit-label">orders</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="calc-results">
+                <button id="calculate-btn">Calculate My Footprint</button>
+                <div id="personal-results" class="personal-results hidden">
+                    <h3>Your Personal Daily Energy Footprint</h3>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <span class="result-label">Digital Life</span>
+                            <span class="result-value" id="result-digital">0</span>
+                            <span class="result-unit">kWh/day</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Transportation</span>
+                            <span class="result-value" id="result-transport">0</span>
+                            <span class="result-unit">kWh/day</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Home Energy</span>
+                            <span class="result-value" id="result-home">0</span>
+                            <span class="result-unit">kWh/day</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Food & Lifestyle</span>
+                            <span class="result-value" id="result-lifestyle">0</span>
+                            <span class="result-unit">kWh/day</span>
+                        </div>
+                        <div class="result-item total">
+                            <span class="result-label">Total Daily</span>
+                            <span class="result-value" id="result-total">0</span>
+                            <span class="result-unit">kWh/day</span>
+                        </div>
+                    </div>
+                    <div class="comparison-message" id="comparison-message"></div>
+                    <div class="personal-chart-container">
+                        <canvas id="personalChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Summary Statistics -->
+        <div class="summary-stats">
+            <div class="stat-item">
+                <div class="stat-value">110-150</div>
+                <div class="stat-label">Total Daily kWh</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">40-55</div>
+                <div class="stat-label">MWh Annual</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">$11-15</div>
+                <div class="stat-label">Daily Energy Cost</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">18-27</div>
+                <div class="stat-label">Tons CO₂/Year</div>
+            </div>
+            <div class="stat-item visible-stat">
+                <div class="stat-value">~40%</div>
+                <div class="stat-label">Visible on Bills</div>
+            </div>
+            <div class="stat-item hidden-stat">
+                <div class="stat-value">~60%</div>
+                <div class="stat-label">Hidden Energy</div>
+            </div>
+        </div>
+        
+        <!-- Key Metrics Cards -->
+        <div class="info-grid">
+            <!-- Digital Life -->
+            <div class="info-card">
+                <h3>Smartphone</h3>
+                <div class="value">0.5<span class="unit"> kWh/day</span></div>
+                <div class="description">5hr use + infrastructure</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> ~0.05 kWh on electric bill</p>
+                        <p><span class="hidden-energy">Hidden:</span> ~0.45 kWh in cell towers & data centers</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card">
+                <h3>Laptop/Computer</h3>
+                <div class="value">8<span class="unit"> kWh/day</span></div>
+                <div class="description">8hr work + cloud</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> ~1.2 kWh device power</p>
+                        <p><span class="hidden-energy">Hidden:</span> ~6.8 kWh cloud services</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card">
+                <h3>AI Assistant</h3>
+                <div class="value">0.5-2<span class="unit"> kWh/day</span></div>
+                <div class="description">Varies by task type</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> ~0 kWh (negligible)</p>
+                        <p><span class="hidden-energy">Hidden:</span> All in GPU servers</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card">
+                <h3>Streaming/Social</h3>
+                <div class="value">0.8<span class="unit"> kWh/day</span></div>
+                <div class="description">3hr entertainment</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> ~0.15 kWh TV/device</p>
+                        <p><span class="hidden-energy">Hidden:</span> ~0.65 kWh CDN/servers</p>
+                    </div>
+                </span>
+            </div>
+            
+            <!-- Home Energy -->
+            <div class="info-card home">
+                <h3>Heating/Cooling</h3>
+                <div class="value">15-40<span class="unit"> kWh/day</span></div>
+                <div class="description">Varies by climate</div>
+            </div>
+            <div class="info-card home">
+                <h3>Hot Water</h3>
+                <div class="value">10<span class="unit"> kWh/day</span></div>
+                <div class="description">Showers, washing</div>
+            </div>
+            <div class="info-card home">
+                <h3>Appliances</h3>
+                <div class="value">8<span class="unit"> kWh/day</span></div>
+                <div class="description">Fridge, washer, etc.</div>
+            </div>
+            <div class="info-card home">
+                <h3>Lighting</h3>
+                <div class="value">2<span class="unit"> kWh/day</span></div>
+                <div class="description">LED throughout</div>
+            </div>
+            
+            <!-- Transportation -->
+            <div class="info-card transport">
+                <h3>Gas Car</h3>
+                <div class="value">33<span class="unit"> kWh/day</span></div>
+                <div class="description">30mi commute</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> Gas pump price only</p>
+                        <p><span class="hidden-energy">Hidden:</span> Oil refining, transport, infrastructure</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card transport">
+                <h3>Electric Car</h3>
+                <div class="value">10<span class="unit"> kWh/day</span></div>
+                <div class="description">30mi commute</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> All 10 kWh on electric bill</p>
+                        <p><span class="hidden-energy">Hidden:</span> Grid losses, battery production</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card transport">
+                <h3>Air Travel</h3>
+                <div class="value">8<span class="unit"> kWh/day</span></div>
+                <div class="description">Averaged annually</div>
+            </div>
+            
+            <!-- Food & Goods -->
+            <div class="info-card food">
+                <h3>Food Production</h3>
+                <div class="value">15<span class="unit"> kWh/day</span></div>
+                <div class="description">Growing to plate</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> 0 kWh (in food prices)</p>
+                        <p><span class="hidden-energy">Hidden:</span> All 15 kWh - farming, processing, transport</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card food">
+                <h3>Food Prep/Storage</h3>
+                <div class="value">5<span class="unit"> kWh/day</span></div>
+                <div class="description">Cooking & fridge</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> All 5 kWh on electric bill</p>
+                        <p><span class="hidden-energy">Hidden:</span> None - direct home use</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card goods">
+                <h3>Clothing/Goods</h3>
+                <div class="value">10<span class="unit"> kWh/day</span></div>
+                <div class="description">Manufacturing share</div>
+                <span class="info-icon" tabindex="0">ⓘ
+                    <div class="tooltip">
+                        <h4>Breakdown</h4>
+                        <p><span class="visible-energy">You see:</span> 0 kWh (in product prices)</p>
+                        <p><span class="hidden-energy">Hidden:</span> All 10 kWh - factories, shipping, retail</p>
+                    </div>
+                </span>
+            </div>
+            <div class="info-card goods">
+                <h3>Services</h3>
+                <div class="value">8<span class="unit"> kWh/day</span></div>
+                <div class="description">Healthcare, retail, etc.</div>
+            </div>
+        </div>
+        
+        <!-- Enhanced AI Section (Collapsible) -->
+        <div class="ai-section collapsible">
+            <div class="ai-section-header" onclick="toggleAISection()">
+                <h2 class="ai-title">🤖 AI Energy Consumption: It's Complicated</h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="ai-section-content">
+                <p class="ai-subtitle">Different AI tasks have vastly different energy requirements</p>
+                
+                <div class="ai-tasks-grid">
+                    <div class="ai-task-card">
+                        <h4>💬 Text Chat (GPT-3.5/4)</h4>
+                        <div class="energy-value">0.002-0.01<span class="energy-unit"> kWh/query</span></div>
+                        <div class="task-description">
+                            Basic chat, writing assistance, code help. Most efficient AI task.
+                        </div>
+                        <div class="energy-scale">
+                            <span style="color: #22c55e;">Low</span>
+                            <div class="scale-bar">
+                                <div class="scale-fill" style="width: 10%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-task-card">
+                        <h4>🧮 Advanced Reasoning</h4>
+                        <div class="energy-value">0.01-0.05<span class="energy-unit"> kWh/query</span></div>
+                        <div class="task-description">
+                            Complex analysis, research tasks, multi-step reasoning (GPT-4o, Claude).
+                        </div>
+                        <div class="energy-scale">
+                            <span style="color: #ffa500;">Medium</span>
+                            <div class="scale-bar">
+                                <div class="scale-fill" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-task-card">
+                        <h4>🎨 Image Generation</h4>
+                        <div class="energy-value">0.05-0.2<span class="energy-unit"> kWh/image</span></div>
+                        <div class="task-description">
+                            Creating images with DALL-E, Midjourney, Stable Diffusion. 10-20x more than text.
+                        </div>
+                        <div class="energy-scale">
+                            <span style="color: #ef4444;">High</span>
+                            <div class="scale-bar">
+                                <div class="scale-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-task-card">
+                        <h4>🎬 Video Generation</h4>
+                        <div class="energy-value">0.5-2<span class="energy-unit"> kWh/min</span></div>
+                        <div class="task-description">
+                            Creating video content with Runway, Pika. Most energy-intensive AI task.
+                        </div>
+                        <div class="energy-scale">
+                            <span style="color: #ef4444;">Very High</span>
+                            <div class="scale-bar">
+                                <div class="scale-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-task-card">
+                        <h4>🔊 Voice/Audio</h4>
+                        <div class="energy-value">0.005-0.02<span class="energy-unit"> kWh/min</span></div>
+                        <div class="task-description">
+                            Voice conversations, transcription, audio generation.
+                        </div>
+                        <div class="energy-scale">
+                            <span style="color: #22c55e;">Low-Med</span>
+                            <div class="scale-bar">
+                                <div class="scale-fill" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-task-card">
+                        <h4>📊 Data Analysis</h4>
+                        <div class="energy-value">0.01-0.1<span class="energy-unit"> kWh/task</span></div>
+                        <div class="task-description">
+                            Processing spreadsheets, creating visualizations, running analyses.
+                        </div>
+                        <div class="energy-scale">
+                            <span style="color: #ffa500;">Variable</span>
+                            <div class="scale-bar">
+                                <div class="scale-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-note">
+                    <h4>📊 To Put This in Perspective:</h4>
+                    <p><strong>1 hour of mixed AI use</strong> (mostly text, some images):</p>
+                    <p>• ~0.5-1.5 kWh total energy consumption</p>
+                    <p>• Equivalent to running a microwave for 30-90 minutes</p>
+                    <p>• 10x more than a Google search, but 5x less than streaming HD video</p>
+                    <p><strong>Heavy AI user</strong> (4+ hours daily with frequent image generation):</p>
+                    <p>• ~3-5 kWh/day - similar to running a space heater for 2-3 hours</p>
+                </div>
+                
+                <h3 style="color: #ffa500; margin-top: 30px;">Factors That Affect AI Energy Use:</h3>
+                <div class="factors-list">
+                    <div class="factor-item">
+                        <h5>Model Size</h5>
+                        <p>GPT-4 uses ~10x more energy than GPT-3.5 for the same query</p>
+                    </div>
+                    <div class="factor-item">
+                        <h5>Query Length</h5>
+                        <p>Longer conversations and context windows increase energy linearly</p>
+                    </div>
+                    <div class="factor-item">
+                        <h5>Server Location</h5>
+                        <p>Data centers powered by renewable energy have lower carbon impact</p>
+                    </div>
+                    <div class="factor-item">
+                        <h5>Time of Day</h5>
+                        <p>Off-peak usage when grids are cleaner reduces carbon footprint</p>
+                    </div>
+                    <div class="factor-item">
+                        <h5>Task Complexity</h5>
+                        <p>Multi-modal tasks (text + image) compound energy requirements</p>
+                    </div>
+                    <div class="factor-item">
+                        <h5>Provider Efficiency</h5>
+                        <p>OpenAI, Google, and Anthropic have different infrastructure efficiency</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-note" style="margin-top: 30px;">
+                    <h4>💡 Energy-Saving Tips for AI Users:</h4>
+                    <p>• Use simpler models (GPT-3.5) for basic tasks</p>
+                    <p>• Batch similar queries together rather than multiple separate sessions</p>
+                    <p>• Download and reuse generated images instead of regenerating</p>
+                    <p>• Consider whether you really need that AI-generated video</p>
+                    <p>• Use AI during off-peak hours when grids are cleaner (nighttime)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Overview Chart -->
+        <div class="chart-grid">
+            <div class="chart-container full-width">
+                <h3 class="chart-title">Complete Daily Energy Footprint Breakdown</h3>
+                <canvas id="mainBreakdownChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Detailed Charts -->
+        <div class="chart-grid">
+            <div class="chart-container">
+                <h3 class="chart-title">Energy by Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">Hidden vs Visible Energy</h3>
+                <canvas id="hiddenChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-grid">
+            <div class="chart-container">
+                <h3 class="chart-title">Digital Infrastructure Breakdown</h3>
+                <canvas id="digitalDetailChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 class="chart-title">Home Energy Profile</h3>
+                <canvas id="homeChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Comparison Section -->
+        <div class="comparison-section">
+            <h3 class="comparison-title">Energy Equivalents: Putting It All In Perspective</h3>
+            <canvas id="equivalentChart"></canvas>
+            <div class="insight-box">
+                <h4>🔍 Surprising Energy Facts</h4>
+                <p><strong>Food Energy:</strong> Your daily food requires 15 kWh to produce - double what your digital devices use!</p>
+                <p><strong>Hidden Digital:</strong> 85% of your digital energy happens in data centers you'll never see.</p>
+                <p><strong>Home Base:</strong> HVAC alone uses more energy than an electric car (unless you drive 100+ miles/day).</p>
+                <p><strong>AI Impact:</strong> 1 hour of text AI = energy to charge your phone for a week. 1 AI image = energy to stream a movie.</p>
+            </div>
+        </div>
+        
+        <!-- Annual Impact -->
+        <div class="chart-container full-width">
+            <h3 class="chart-title">Annual Energy Budget by Category</h3>
+            <canvas id="annualChart"></canvas>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #64ffda;"></div>
+                <span>Digital/Tech</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #fb923c;"></div>
+                <span>Home Energy</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #a855f7;"></div>
+                <span>Transportation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #22c55e;"></div>
+                <span>Food System</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ef4444;"></div>
+                <span>Goods/Services</span>
+            </div>
+        </div>
+        
+        <div class="insight-box">
+            <h4>📊 Your Total Energy Budget</h4>
+            <p><strong>Average American Total:</strong> 110-150 kWh/day across all activities</p>
+            <ul style="color: #a8b2d1;">
+                <li><strong>Home (30-50 kWh):</strong> Heating/cooling dominates, varies by climate</li>
+                <li><strong>Transportation (10-40 kWh):</strong> Huge variation based on vehicle type</li>
+                <li><strong>Digital Life (10-15 kWh):</strong> Includes device usage and infrastructure</li>
+                <li><strong>Food (20 kWh):</strong> From farm to disposal</li>
+                <li><strong>Goods & Services (18 kWh):</strong> Your share of manufacturing and services</li>
+                <li><strong>Water & Waste (3 kWh):</strong> Treatment and delivery</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>Data sources: DOE, EPA, IEA Reports 2024, USDA Food Energy Analysis, MIT Lifecycle Studies, Lawrence Berkeley National Laboratory</p>
+            <p>AI energy data: OpenAI, Google DeepMind, IEA Digital Economy Reports 2024</p>
+        </div>
+    </div>
+    
+    <!-- JavaScript Files -->
+    <script src="config.js"></script>
+    <script src="charts.js"></script>
+    <script src="calculator.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
