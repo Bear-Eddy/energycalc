@@ -279,9 +279,9 @@ canvas {
 .input-group {
     margin-bottom: 20px;
     display: grid;
-    grid-template-columns: 1fr 80px 80px;
+    grid-template-columns: 1fr 60px 70px;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .input-group label {
@@ -294,9 +294,9 @@ canvas {
     background: rgba(17, 25, 40, 0.8);
     border: 1px solid rgba(100, 255, 218, 0.3);
     color: #e0e6ed;
-    padding: 8px 12px;
+    padding: 6px 8px;
     border-radius: 8px;
-    font-size: 1em;
+    font-size: 0.95em;
     text-align: center;
 }
 
@@ -794,9 +794,9 @@ canvas {
 
 .ai-input-row {
     display: grid;
-    grid-template-columns: 1fr 80px 80px;
+    grid-template-columns: 1fr 60px 70px;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 12px;
 }
 
@@ -809,9 +809,9 @@ canvas {
     background: rgba(17, 25, 40, 0.8);
     border: 1px solid rgba(255, 165, 0, 0.3);
     color: #e0e6ed;
-    padding: 8px 12px;
+    padding: 6px 8px;
     border-radius: 8px;
-    font-size: 1em;
+    font-size: 0.95em;
     text-align: center;
     width: 100%;
 }
