@@ -286,7 +286,7 @@ canvas {
 
 /* Special layout for groups with select elements */
 .input-group:has(select) {
-    grid-template-columns: minmax(120px, 1fr) minmax(180px, 1fr);
+    grid-template-columns: minmax(120px, 1fr) minmax(150px, 250px);
     gap: 12px;
 }
 
@@ -314,6 +314,7 @@ canvas {
 .input-group select {
     text-align: left;
     cursor: pointer;
+    max-width: 250px;
 }
 
 .input-group input:focus,
