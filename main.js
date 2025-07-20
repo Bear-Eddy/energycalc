@@ -16,9 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize info card updater
         InfoCardUpdater.init();
         console.log('Info card updater initialized');
-        
-        // Make InfoCardUpdater available globally AFTER init
-        window.InfoCardUpdater = InfoCardUpdater;
         console.log('InfoCardUpdater available globally:', !!window.InfoCardUpdater);
         
         console.log('Energy Calculator ready!');

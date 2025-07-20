@@ -208,3 +208,6 @@ const InfoCardUpdater = {
         }
     }
 };
+
+// Make InfoCardUpdater available globally immediately
+window.InfoCardUpdater = InfoCardUpdater;
